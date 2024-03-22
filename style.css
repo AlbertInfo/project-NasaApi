@@ -1,0 +1,334 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ojuju&display=swap");
+
+html,
+body,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Ojuju", sans-serif;
+  /* font-family: "Black Ops One", system-ui; */
+  color: white;
+  background-color: black;
+  position: relative;
+  width: 100%;
+}
+
+header {
+  width: 100%;
+  background-image: url(./img/headerimg.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header h1 {
+  font-family: "Black Ops One", system-ui;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+header h1:hover {
+  color: rgb(37, 158, 179);
+  transition: 0.5s;
+}
+
+.astronomy-picture {
+  max-width: 1050px;
+  background-position: center;
+  background-color: rgba(0, 176, 230, 0.5);
+  background: linear-gradient(
+    52deg,
+    rgba(0, 176, 230, 1) 0%,
+    rgba(8, 53, 74, 1) 22%,
+    rgba(15, 38, 48, 1) 100%
+  );
+  margin: 0 auto;
+  margin-top: 1.5rem;
+
+  padding: 1rem;
+}
+.astronomy-picture h2 {
+  font-family: "Ojuju", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  padding: 1rem;
+}
+
+article {
+  display: flex;
+  align-items: flex-start;
+}
+article img {
+  width: 100%;
+  max-height: 700px;
+  max-width: 50%;
+  margin: 0.5rem;
+}
+
+.text-container h3 {
+  padding: 1rem;
+}
+.text-container p {
+  padding: 1rem;
+}
+.mars-chart {
+  margin-top: 1rem;
+  min-height: 450px;
+  width: 100%;
+  overflow-y: auto;
+}
+.mars-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+.mars-today {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  color: white;
+  background-color:black;
+  border-width: 8px;
+  border-style: solid;
+  border-image: linear-gradient(to right, rgba(0, 176, 230, 1) 0%,
+  rgba(15, 38, 48, 1)) 1;
+  
+  padding: 1rem;
+}
+.mars-today span{
+  background-color: rgba(0, 176, 230, 1);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.previous-image {
+  display: flex;
+  flex-direction: column;
+}
+.previous-image h2 {
+  color: white;
+  font-size: 2rem;
+  padding: 1rem;
+  align-self: center;
+ 
+  border-width: 8px;
+  border-style:solid;
+  border-image: linear-gradient(to right, rgba(0, 176, 230, 1) 0%,
+  rgba(15, 38, 48, 1)) 1;
+
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.previous-image h3 {
+  color: black;
+  padding: 1rem;
+}
+.pictures-container {
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.picture-container:hover {
+  transition: 0.5s;
+  scale: 1.2;
+}
+.picture-container {
+  flex: 0 0 25%;
+}
+
+.picture-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 270.5px;
+  display: block;
+}
+
+@media screen and (max-width: 576px) {
+  article {
+    flex-direction: column;
+  }
+  article img {
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  .astronomy-picture {
+    max-width: 100%;
+    margin-top: 0;
+  }
+  .picture-container {
+    flex: 0 0 100%;
+  }
+  .picture-details p {
+    font-size: 0.8rem;
+  }
+  .description-image {
+    font-size: 0.8rem;
+    overflow-y: scroll;
+  }
+  .picture-details h2 {
+    font-size: 1.2rem;
+  }
+  .picture-details img {
+    height: 50vh;
+  }
+  #mars-today {
+    align-self: center;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .picture-container {
+    flex: 0 0 50%;
+  }
+  .picture-details p {
+    font-size: 0.8rem;
+  }
+  .picture-details h2 {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  #mars-today {
+    align-self: center;
+  }
+}
+@media screen and (min-width: 768px) {
+  .picture-container {
+    flex: 0 0 calc(100% / 3);
+  }
+  .mars-today{
+    align-self: center;
+  }
+}
+@media screen and (min-width: 992px) {
+  .picture-container {
+    flex: 0 0 25%;
+  }
+}
+
+.custom-loader {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #e4e4ed;
+  border-right-color: #766df4;
+  animation: s2 1s infinite linear;
+}
+@keyframes s2 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.picture-details-container {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.show {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.picture-details {
+  width: 80%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0 auto;
+  background-color: rgb(0, 176, 230);
+  background: linear-gradient(
+    52deg,
+    rgba(0, 176, 230, 1) 0%,
+    rgba(8, 53, 74, 1) 22%,
+    rgba(15, 38, 48, 1) 100%
+  );
+  color: white;
+  overflow-y: auto;
+
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.picture-details img {
+  width: 100%;
+ 
+  max-height: 50vh;
+  overflow-y: auto;
+  object-fit: cover;
+}
+.display-none {
+  display: none;
+}
+.picture-details h2 {
+  padding: 0.8rem;
+  font-size : 1.5rem
+}
+
+.picture-details p {
+  padding: 0.8rem;
+  font-size: 1rem;
+}
+
+.escSpan {
+  background-color: black;
+  align-self: flex-end;
+  margin-right: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.escSpan:hover {
+  transition: 0.5s;
+  background-color: rgb(53, 49, 49);
+}
+
+i {
+  font-size: 3.5rem;
+}
+.arrowRight{
+  
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  cursor: pointer;
+}
+.arrowLeft{
+ 
+  position: absolute;
+  left: 2.5rem;
+  top: 50%;
+  cursor: pointer;
+}
