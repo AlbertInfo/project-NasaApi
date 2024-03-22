@@ -28,15 +28,6 @@ let picture_details_container = document.querySelector(
   ".picture-details-container"
 );
 let picture_details = document.querySelector(".picture-details");
-
-// let rigthArrow = document.createElement("i");
-// let leftArrow = document.createElement("i");
-// rigthArrow.classList.add("arrowRight");
-// leftArrow.classList.add("arrowLeft");
-// rigthArrow.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
-// leftArrow.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
-// picture_details_container.append(leftArrow);
-// picture_details_container.append(rigthArrow);
 let astronomyPicturesUrl = `https://api.nasa.gov/planetary/apod?start_date=${start_date}&end_date=${end_date}&api_key=${apiKey}&thumbs=true`;
 
 let fetchPictures = () => {
@@ -76,31 +67,37 @@ function createMainText(explanation, data) {
   description.prepend(title);
   mainPicture.append(description);
 }
-// function createPreviousImage(element, previouseImages) {
-//   let picture_container = document.createElement("div");
-//   pictures_container.append(picture_container);
-//   picture_container.classList.add("picture-container");
-//   let previousImage = document.createElement("img");
-//   if (element.media_type === "image") {
-//     previousImage.src = element.url;
-//   } else {
-//     previousImage.src = element.thumbnail_url;
-//   }
-//   picture_container.append(previousImage);
+function createPreviousImage(element, index) {
+  console.log(index);
+  let picture_container = document.createElement("div");
+  pictures_container.append(picture_container);
+  picture_container.classList.add("picture-container");
+  let previousImage = document.createElement("img");
+  if (element.media_type === "image") {
+    previousImage.src = element.url;
+  } else {
+    previousImage.src = element.thumbnail_url;
+  }
+  picture_container.append(previousImage);
 
-//   picture_container.addEventListener("click", (e) => {
-//     showDetails(element);
-//   });
-// }
+  picture_container.addEventListener("click", () => {
+    showDetails(index);
+    console.log(index);
+  });
+}
 
-// function showDetails(element) {
-//   make(element);
-// }
+let previouseImagesArray = [];
 
+function showDetails(index) {
+  let element = previouseImagesArray[index];
+
+  make(element, index);
+}
 let fetchedPictures = fetchPictures().then((data) => {
   pictures_container.innerHTML = "";
   let newArray = data.reverse();
   let previouseImages = newArray.slice(1, 17);
+  previouseImagesArray = previouseImages;
   let url = newArray[0].url;
   if (newArray[0].media_type === "image") {
     createMainImage(url);
@@ -109,122 +106,46 @@ let fetchedPictures = fetchPictures().then((data) => {
   }
   createMainText(data[0].explanation, data[0].title);
 
-      let leftArrow = document.createElement("i");
-      leftArrow.classList.add("arrowLeft");
-      let rigthArrow = document.createElement("i");
-      rigthArrow.classList.add("arrowRight");
-      rigthArrow.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
-      leftArrow.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
-      picture_details_container.append(rigthArrow);
-      picture_details_container.append(leftArrow);
-
-
   for (let i = 0; i < previouseImages.length; i++) {
-    let imageContainer = document.createElement("div");
-    imageContainer.classList.add("picture-container");
-    // console.log(previouseImages)
-    let image = document.createElement("img");
-    if (previouseImages[i].media_type === "image") {
-      image.src = previouseImages[i].url;
-    } else {
-      image.src = previouseImages[i].thumbnail_url;
-    }
-    imageContainer.append(image);
-    pictures_container.append(imageContainer);
-
-    // leftArrow.classList.add("arrowLeft");
-
-    imageContainer.addEventListener("click", () => {
-      
-      picture_details.innerHTML = "";
-      if (i === 0) {
-        leftArrow.style.display = "none";
-        rigthArrow.style.display ='flex'
-        make(previouseImages[0]);
-
-      }
-      
-      if (i === 15 ) {
-        leftArrow.style.display ='flex'
-        rigthArrow.style.display = "none";
-        make(previouseImages[15]);
-
-      } else if(i != 0) {
-        leftArrow.style.display ='flex'
-        rigthArrow.style.display ='flex'
-        make(previouseImages[i]);
-      }
-
-      
-
-      // make(previouseImages[i]);
-      // let leftArrow = document.createElement("i");
-      // leftArrow.classList.add("arrowLeft");
-      // let rigthArrow = document.createElement("i");
-      // rigthArrow.classList.add("arrowRight");
-      // rigthArrow.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
-      // leftArrow.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
-      // picture_details_container.append(rigthArrow);
-      // picture_details_container.append(leftArrow);
-
-      // console.log("ho pulito");
-
-      console.log(i);
-      
-
-      leftArrow.addEventListener("click", () => {
-        // picture_details.innerHTML = "";
-        // console.log(i);
-        console.log(i)
-        i = i-1;
-        // console.log(i);
-        // if (i === 0) {
-        //   leftArrow.style.display = "none";
-        //   rigthArrow.style.display = 'flex';
-        //   make(previouseImages[0]);
-        // } else if (i != 0) {
-        //   make(previouseImages[i]);
-        // }
-
-        // if (i != 15) {
-        //   rigthArrow.style.display = "flex";
-        // }
-      });
-
-      // console.log(i)
-      rigthArrow.addEventListener("click", () => {
-        // console.log(i)
-        console.log(i);
-        // i = i+1
-        // if (i === 15) {
-        //   i=0
-        //   make(previouseImages[15]);
-        //   rigthArrow.style.display = "none";
-        //   leftArrow.style.display ='flex';
-         
-        // } else {
-         
-        //   rigthArrow.style.display = "flex";
-        //   leftArrow.style.display ='flex';
-         
-        //   make(previouseImages[i]);
-         
-        // }
-      });
-      
-      
-    });
-
     // console.log(i)
+    createPreviousImage(previouseImages[i], i);
   }
 });
 
-function make(element) {
-  // console.log(element)
+function make(element, index) {
   picture_details.innerHTML = "";
+
   picture_details_container.style.display = "flex";
   picture_details.style.display = "flex";
 
+  let leftArrow = document.createElement("i");
+  leftArrow.classList.add("arrowLeft");
+  let rigthArrow = document.createElement("i");
+  rigthArrow.classList.add("arrowRight");
+  rigthArrow.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+  leftArrow.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
+  console.log(index);
+  if (index === 0) {
+    leftArrow.style.display = "none";
+  }
+  if (index === previouseImagesArray.length - 1) {
+    rigthArrow.style.display = "none";
+  }
+
+  leftArrow.addEventListener("click", () => {
+    showDetails(index - 1);
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      showDetails(index - 1);
+    }
+    if (e.key === "ArrowRight") {
+      showDetails(index + 1);
+    }
+  });
+  rigthArrow.addEventListener("click", () => {
+    showDetails(index + 1);
+  });
   let image = document.createElement("img");
   if (element.media_type === "image") {
     image.src = element.url;
@@ -241,24 +162,7 @@ function make(element) {
     let copyrightText = element.copyright;
     copyright.textContent = `Copyright:${copyrightText}`;
   }
-
-  // picture_details.append(leftArrow);
-  // picture_details.append(rigthArrow);
-  // let rigthArrow = document.createElement("i");
-  // let leftArrow = document.createElement("i");
-  // rigthArrow.classList.add("arrowRight");
-  // leftArrow.classList.add("arrowLeft");
-  // rigthArrow.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
-  // leftArrow.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
-  // picture_details_container.append(leftArrow);
-  // picture_details_container.append(rigthArrow);
-  // let rigthArrow = document.createElement("i");
-  // let leftArrow = document.createElement("i");
-  // rigthArrow.classList.add("arrowRight");
-  // leftArrow.classList.add("arrowLeft");
-  // rigthArrow.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
-  // leftArrow.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
-  // descriptionImage.classList.add("description-image");
+  descriptionImage.classList.add("description-image");
   let escSpan = document.createElement("span");
   escSpan.textContent = "BACK";
   escSpan.classList.add("escSpan");
@@ -268,6 +172,8 @@ function make(element) {
   picture_details.append(descriptionImage);
   picture_details.append(copyright);
   picture_details.append(escSpan);
+  picture_details.append(rigthArrow);
+  picture_details.append(leftArrow);
 }
 
 window.addEventListener("click", (e) => {
